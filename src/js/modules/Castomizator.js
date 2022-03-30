@@ -8,6 +8,7 @@ export default class Castomizator {
 
     this.btnBlock.addEventListener('click', (e) => this.onScaleChange(e));
     this.colorPicker.addEventListener('input', (e) => this.onColorChange(e));
+    this.clear.addEventListener('click', () => this.reset());
   }
 
 
@@ -52,6 +53,15 @@ export default class Castomizator {
   }
 
 
+  reset() {
+    localStorage.clear();
+    this.scale = 1;
+    this.color = '#ffffff';
+    this.setBgColor();
+    this.onScaleChange();
+  }
+
+
   injectStyle() {
     const style = document.createElement('style');
     style.innerHTML = `
@@ -91,6 +101,11 @@ export default class Castomizator {
         width: 40px;
         height: 40px;
       }
+
+      .clear {
+        font-size: 30px;
+        cursor: pointer;
+      }
     `;
     document.querySelector('head').appendChild(style);
   }
@@ -106,7 +121,7 @@ export default class Castomizator {
           panel = document.createElement('div');
 
     panel.classList.add('panel');
-    panel.append(this.btnBlock, this.colorPicker);
+    panel.append(this.btnBlock, this.colorPicker, this.clear);
     this.clear.innerHTML = '&times';
     this.clear.classList.add('clear');
 
