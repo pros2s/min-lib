@@ -45,6 +45,13 @@ export default class Castomizator {
   }
 
 
+  setBgColor() {
+    const body = document.querySelector('body');
+    body.style.backgroundColor = this.color;
+    this.colorPicker.value = this.color;
+  }
+
+
   injectStyle() {
     const style = document.createElement('style');
     style.innerHTML = `
@@ -90,6 +97,7 @@ export default class Castomizator {
 
 
   render() {
+    this.setBgColor();
     this.injectStyle();
     this.onScaleChange();
 
