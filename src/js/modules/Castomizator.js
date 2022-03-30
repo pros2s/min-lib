@@ -4,8 +4,10 @@ export default class Castomizator {
     this.colorPicker = document.createElement('input');
     this.clear = document.createElement('div');
     this.scale = localStorage.getItem('scale') || 1;
+    this.color = localStorage.getItem('color') || '#ffffff';
 
     this.btnBlock.addEventListener('click', (e) => this.onScaleChange(e));
+    this.colorPicker.addEventListener('input', (e) => this.onColorChange(e));
   }
 
 
@@ -36,6 +38,13 @@ export default class Castomizator {
   }
 
 
+  onColorChange(e) {
+    const body = document.querySelector('body');
+    body.style.backgroundColor = e.target.value;
+    localStorage.setItem('color', e.target.value);
+  }
+
+
   render() {
     this.onScaleChange();
 
@@ -44,7 +53,7 @@ export default class Castomizator {
           panel = document.createElement('div');
 
     panel.classList.add('panel');
-    panel.append(this.btnBlock, this.colorPeacker);
+    panel.append(this.btnBlock, this.colorPicker);
     this.clear.innerHTML = '&times';
     this.clear.classList.add('clear');
 
